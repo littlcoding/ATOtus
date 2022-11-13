@@ -1,22 +1,26 @@
 from pages.login_admin_page import LoginAdminPage
+from pages.admin_page import AdminPage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+product_name = 'random_name'
 
-def test_inputs(browser):
+def test_add_item(browser):
     browser.get(browser.base_url + '/admin')
-    browser.find_element(*LoginAdminPage.PASSWORD_INPUT)
-    return WebDriverWait(browser, 2).until(EC.visibility_of_element_located(LoginAdminPage.USERNAME_INPUT))
+    LoginAdminPage(browser).login_admin('user', 'bitnami')
+    AdminPage(browser).select_left_menu('catalog', 'Products')
+    AdminPage(browser).add_new_item()
+    AdminPage(browser).fill_general_tab(product_name=product_name, tag='random_tag')
+    AdminPage(browser).pick_tab(tab_name='Data')
+    AdminPage(browser).fill_model_tab(model='random_model')
+    AdminPage(browser).add_new_item()
 
-def test_login_button(browser):
+def test_delete_item(browser):
     browser.get(browser.base_url + '/admin')
-    return WebDriverWait(browser, 2).until(EC.element_to_be_clickable(LoginAdminPage.LOGIN_BUTTON))
+    LoginAdminPage(browser).login_admin('user', 'bitnami')
+    AdminPage(browser).select_left_menu('catalog', 'Products')
+    AdminPage(browser).delete_item(product_name=product_name)
+    alert = WebDriverWait(browser, 2).until(EC.alert_is_present())
+    alert.accept()
 
-def test_forgot_pass(browser):
-    browser.get(browser.base_url + '/admin')
-    return WebDriverWait(browser, 2).until(EC.element_to_be_clickable(LoginAdminPage.FORGOT_PASSWORD))
-
-def test_oc_link(browser):
-    browser.get(browser.base_url + '/admin')
-    return WebDriverWait(browser, 2).until(EC.element_to_be_clickable(LoginAdminPage.OPENCART_LINK))
 

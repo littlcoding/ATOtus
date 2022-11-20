@@ -6,6 +6,7 @@ from src.Circle import Circle
 from src.Triangle import Triangle
 from src.Square import Square
 from src.Rectangle import Rectangle
+from pages import Base_page
 
 
 
@@ -33,7 +34,7 @@ def pytest_addoption(parser: object):
         "--headless", action="store_true", help="browser to run tests"
     )
     parser.addoption(
-        "--base_url", default="http://192.168.0.4:8081/", help="browser to run tests"
+        "--base_url", default="http://192.168.0.5:8081/", help="browser to run tests"
     )
 
 @pytest.fixture
@@ -48,7 +49,7 @@ def browser(request):
         if headless:
             options.headless = True
 
-        _browser = webdriver.Chrome(options=options)
+        _browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', options=options)
     elif browser_name == 'firefox':
         _browser = webdriver.Firefox()
     elif browser_name == 'opera':
@@ -57,6 +58,7 @@ def browser(request):
         _browser = webdriver.Safari()
 
     _browser.base_url = base_url
+    _browser.get(base_url)
 
     yield _browser
 

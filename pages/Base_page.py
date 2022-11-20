@@ -1,5 +1,6 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
+import allure
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
@@ -17,9 +18,11 @@ class BasePage:
     def __init__(self, browser):
         self.browser = browser
 
+    @allure.step('Click on "{element}"')
     def click(self, element):
         ActionChains(self.browser).move_to_element(element).pause(0.1).click().perform()
 
+    @allure.step('Send "{value}" into the field')
     def _input(self, element, value):
         self.click(element)
         element.clear()
@@ -37,6 +40,7 @@ class BasePage:
         except TimeoutException:
             raise AssertionError(f"Не дождался видимости элементов {locator}")
 
+    @allure.step('Login into user')
     def login(self, username, password):
         self.click(self.element(self.LOGIN_DROPDOWN))
         self.click(self.element(self.LOGIN))

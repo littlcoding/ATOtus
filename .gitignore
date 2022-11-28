@@ -4,3 +4,4 @@ venv/
 geckodriver.log
 allure-report/
 allure-results.
+logs/

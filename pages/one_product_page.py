@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.Base_page import BasePage
+import allure
+
 
 class ProductPage(BasePage):
     PRODUCT_IMG = (By.CSS_SELECTOR, '.thumbnails > li:first-child')

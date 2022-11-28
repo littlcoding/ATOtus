@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.Base_page import BasePage
+import allure
+
 
 class SmartphonesPage(BasePage):
     CATEGORIES_LIST = (By.CSS_SELECTOR, '.list-group')

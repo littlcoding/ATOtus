@@ -1,5 +1,9 @@
 from pages.main_page import MainPage
+import allure
 
+
+@allure.feature('Regression')
+@allure.title('Smoke main page')
 def test_main_page(browser):
     main_page = MainPage(browser)
     main_page.login(username='qwe@gmail.com', password='qwer1234')

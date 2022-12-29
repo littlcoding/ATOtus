@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.Base_page import BasePage
+import allure
 
 class SignupPage(BasePage):
     FIRST_NAME_INPUT = (By.ID, 'input-firstname')
@@ -12,6 +13,7 @@ class SignupPage(BasePage):
     MY_ACCOUNT = (By.XPATH, "//*[@title='My Account']")
     REGISTER_LINK = (By.LINK_TEXT, 'Register')
 
+    @allure.step('Smoke check for elements')
     def look_for_elements(self):
         self.element(self.FIRST_NAME_INPUT)
         self.element(self.LAST_NAME_INPUT)
@@ -19,11 +21,13 @@ class SignupPage(BasePage):
         self.element(self.TEL_NO_INPUT)
         self.element(self.PASS_INPUT)
 
+    @allure.step('Going to signup page')
     def go_to_sign_up(self):
         self.click(self.element(self.MY_ACCOUNT))
         self.click(self.element(self.REGISTER_LINK))
         return self
 
+    @allure.step('Signing in the new user')
     def sign_up(self, firstname, lastname, email, telephone, password, passwordconfirm):
         self._input(self.element(self.FIRST_NAME_INPUT), firstname)
         self._input(self.element(self.LAST_NAME_INPUT), lastname)

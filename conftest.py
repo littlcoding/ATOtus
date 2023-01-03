@@ -9,7 +9,7 @@ def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome", help="browser to run tests")
     parser.addoption("--headless", action="store_true", help="browser to run tests")
     parser.addoption("--base_url", default="https://demo.opencart.com", help="browser to run tests")
-    parser.addoption("--executor", action="store", default="192.168.0.5")
+    parser.addoption("--executor", action="store", default="127.0.0.1")
     parser.addoption("--log_level", action="store", default="DEBUG")
     parser.addoption("--mobile", action="store_true")
     parser.addoption("--vnc", action="store_true")

@@ -8,7 +8,7 @@ from selenium import webdriver
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome", help="browser to run tests")
     parser.addoption("--headless", action="store_true", help="browser to run tests")
-    parser.addoption("--base_url", default="http://192.168.0.5:8081", help="browser to run tests")
+    parser.addoption("--base_url", default="https://demo.opencart.com", help="browser to run tests")
     parser.addoption("--executor", action="store", default="192.168.0.5")
     parser.addoption("--log_level", action="store", default="DEBUG")
     parser.addoption("--mobile", action="store_true")
@@ -36,21 +36,6 @@ def browser(request):
     logger.setLevel(level=log_level)
 
     logger.info("===> Test {} started at {}".format(request.node.name, datetime.datetime.now()))
-
-    # if browser == 'chrome':
-    #     options = webdriver.ChromeOptions()
-    #
-    #     if headless:
-    #         options.headless = True
-    #
-    #     driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', options=options)
-    # elif browser == 'firefox':
-    #     driver = webdriver.Firefox()
-    # elif browser == 'opera':
-    #     driver = webdriver.Opera()
-    # elif browser == 'safari':
-    #     driver = webdriver.Safari()
-    # else:
 
     caps = {
             "browserName": browser,
